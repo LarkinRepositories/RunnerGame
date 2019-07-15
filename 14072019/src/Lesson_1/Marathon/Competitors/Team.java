@@ -15,8 +15,8 @@ public class Team implements Competitor {
 
     public void showResults() {
         this.info();
-        if (this.isOnDistance()) System.out.println(teamName + " справилась с полосой препядствий");
-        else System.out.println(teamName + " не справилась с полосой препядствий");
+        if (this.isOnDistance()) System.out.println(teamName + " справилась с полосой препятствий");
+        else System.out.println(teamName + " не справилась с полосой препятствий");
     }
 
     @Override
