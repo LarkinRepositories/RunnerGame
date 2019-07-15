@@ -2,13 +2,13 @@ package Lesson_1.Marathon.Obstacles;
 
 import Lesson_1.Marathon.Competitors.Competitor;
 
-import java.util.Arrays;
+
 
 public class Course extends Obstacle {
     private Obstacle[] course;
 
     public Course(Obstacle...obstacles) {
-        this.course = Arrays.copyOf(obstacles, obstacles.length);
+        this.course = obstacles;
     }
 
     @Override

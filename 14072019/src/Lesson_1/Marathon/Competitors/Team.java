@@ -1,6 +1,5 @@
 package Lesson_1.Marathon.Competitors;
 
-import java.util.Arrays;
 
 public class Team implements Competitor {
     private String teamName;
@@ -8,7 +7,7 @@ public class Team implements Competitor {
 
     public Team(String teamName, Competitor... competitors) {
         this.teamName = teamName;
-        this.competitors = Arrays.copyOf(competitors, competitors.length);
+        this.competitors = competitors;
     }
 
     public void showResults() { //выводим результат
