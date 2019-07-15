@@ -1,13 +1,7 @@
 package Lesson_1.Marathon;
 
-import Lesson_1.Marathon.Competitors.Cat;
-import Lesson_1.Marathon.Competitors.Dog;
-import Lesson_1.Marathon.Competitors.Human;
-import Lesson_1.Marathon.Competitors.Team;
-import Lesson_1.Marathon.Obstacles.Course;
-import Lesson_1.Marathon.Obstacles.Cross;
-import Lesson_1.Marathon.Obstacles.Wall;
-import Lesson_1.Marathon.Obstacles.Water;
+import Lesson_1.Marathon.Competitors.*;
+import Lesson_1.Marathon.Obstacles.*;
 
 public class Main {
     public static void main(String[] args) {

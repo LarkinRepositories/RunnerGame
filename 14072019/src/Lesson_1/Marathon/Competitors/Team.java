@@ -1,7 +1,5 @@
 package Lesson_1.Marathon.Competitors;
 
-import Lesson_1.Marathon.Competitors.Competitor;
-
 import java.util.Arrays;
 
 public class Team implements Competitor {
