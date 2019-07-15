@@ -1,4 +1,6 @@
-package Lesson_1.Marathon;
+package Lesson_1.Marathon.Competitors;
+
+import Lesson_1.Marathon.Competitors.Competitor;
 
 import java.util.Arrays;
 
@@ -46,8 +48,7 @@ public class Team implements Competitor {
         for (Competitor competitor:this.competitors) {
             if (competitor.isOnDistance()) teamScore++;
         }
-        if (teamScore == this.competitors.length) return true;
-        return false;
+        return teamScore == this.competitors.length;
     }
 
     @Override
