@@ -23,6 +23,7 @@ public class Team implements Competitor {
         }
     }
 
+
     @Override
     public void swim(int dist) {
         for (Competitor competitor:this.competitors) {
