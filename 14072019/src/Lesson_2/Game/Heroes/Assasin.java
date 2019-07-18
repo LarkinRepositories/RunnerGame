@@ -24,4 +24,9 @@ public class Assasin extends Hero implements DealsDamage {
             System.out.println(this.name + " РЅР°РЅРµСЃ СѓСЂРѕРЅ " + hero.name);
         }
     }
+
+    @Override
+    void info() {
+        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health +" "+damage));
+    }
 }

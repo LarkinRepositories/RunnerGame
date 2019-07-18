@@ -11,4 +11,9 @@ public class Doctor extends Hero implements CanHeal {
     public void healing(Hero hero) {
         hero.addHealth(addHeal);
     }
+
+    @Override
+    void info() {
+        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health +" "+addHeal));
+    }
 }

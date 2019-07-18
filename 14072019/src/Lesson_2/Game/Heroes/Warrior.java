@@ -19,4 +19,8 @@ public class Warrior extends Hero implements DealsDamage {
         }
     }
 
+    @Override
+    void info() {
+        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health +" "+damage));
+    }
 }
