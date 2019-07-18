@@ -1,4 +1,7 @@
 package Lesson_2.Game;
+import Lesson_2.Game.Heroes.*;
+
+import java.util.Random;
 
 public class Game {
     public static void main(String[] args) {
@@ -7,14 +10,14 @@ public class Game {
         Random randomHealing = new Random();
         int round = 3;
 
-        Hero[] team1 = new Hero[]{new Warrior(250, "РўРёРіСЂРёР»", 50, 0)
-                , new Assasin(150, "РђРєР°Р»Рё", 70, 0)
-                , new Doctor(120, "Р–Р°РЅРЅР°", 0, 60)};
+        Hero[] team1 = new Hero[]{new Warrior(250, "Воин1", 50)
+                , new Assasin(150, "Ассасин1", 70)
+                , new Doctor(120, "Доктор1", 60)};
 
 
-        Hero[] team2 = new Hero[]{new Warrior(290, "РњРёРЅРѕС‚Р°РІСЂ", 60, 0)
-                , new Assasin(160, "Р”Р¶РёРЅРєСЃ", 90, 0)
-                , new Doctor(110, "Р—РѕРё", 0, 80)};
+        Hero[] team2 = new Hero[]{new Warrior(290, "Воин2", 60)
+                , new Assasin(160, "Ассасин2", 90)
+                , new Doctor(110, "Доктор2", 80)};
 
 
 

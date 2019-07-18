@@ -28,8 +28,5 @@ public abstract class Hero implements Damagable, Healable {
         this.health += health;
     }
 
-    void info() {
-
-        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health));
-    }
+    abstract void info();
 }
