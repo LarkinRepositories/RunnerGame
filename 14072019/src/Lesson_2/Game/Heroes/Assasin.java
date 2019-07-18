@@ -5,7 +5,7 @@ import java.util.Random;
 public class Assasin extends Hero {
     private int cricitalHit;
     private int damage;
-    Random random = new Random();
+    private Random random = new Random();
 
     public Assasin(int health, String name, int damage) {
         super(health, name);
@@ -16,7 +16,7 @@ public class Assasin extends Hero {
     @Override
     public void hit(Hero hero) {
         if (hero != this) {
-            if (this.getHealth() < 0) {
+            if (hero.getHealth() <= 0) {
                 System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage + cricitalHit);

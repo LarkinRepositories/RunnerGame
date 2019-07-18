@@ -10,7 +10,7 @@ public class Warrior extends Hero {
     @Override
     public void hit(Hero hero) {
         if (hero != this) {
-            if(this.getHealth() < 0) {
+            if(hero.getHealth() <= 0) {
                 System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage);
