@@ -1,6 +1,6 @@
 package Lesson_2.Game.Heroes;
 
-public class Warrior extends Hero implements DealsDamage {
+public class Warrior extends Hero {
     private int damage;
     public Warrior(int health, String name, int damage) {
         super(health, name);
@@ -10,17 +10,22 @@ public class Warrior extends Hero implements DealsDamage {
     @Override
     public void hit(Hero hero) {
         if (hero != this) {
-            if(health < 0) {
-                System.out.println("Р“РµСЂРѕР№ РїРѕРіРёР± Рё Р±РёС‚СЊ РЅРµ РјРѕР¶РµС‚!");
+            if(this.getHealth() < 0) {
+                System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage);
             }
-            System.out.println(this.name + " РЅР°РЅРµСЃ СѓСЂРѕРЅ " + hero.name);
+            System.out.println(this.getName() + " наносит урон " + hero.getName());
         }
     }
 
     @Override
-    void info() {
-        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health +" "+damage));
+    public void info() {
+        System.out.println(this.getName() + " " + (this.getHealth() < 0 ? this.getName()+ " мертв!" : this.getHealth() +" "+damage));
+    }
+
+    @Override
+    public void healing(Hero hero) {
+        System.out.println("Воин не может лечить");
     }
 }

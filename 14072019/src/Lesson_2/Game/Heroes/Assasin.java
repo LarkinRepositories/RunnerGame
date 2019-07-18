@@ -2,7 +2,7 @@ package Lesson_2.Game.Heroes;
 
 import java.util.Random;
 
-public class Assasin extends Hero implements DealsDamage {
+public class Assasin extends Hero {
     private int cricitalHit;
     private int damage;
     Random random = new Random();
@@ -16,17 +16,22 @@ public class Assasin extends Hero implements DealsDamage {
     @Override
     public void hit(Hero hero) {
         if (hero != this) {
-            if (health < 0) {
-                System.out.println("Р“РµСЂРѕР№ РїРѕРіРёР± Рё Р±РёС‚СЊ РЅРµ РјРѕР¶РµС‚!");
+            if (this.getHealth() < 0) {
+                System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage + cricitalHit);
             }
-            System.out.println(this.name + " РЅР°РЅРµСЃ СѓСЂРѕРЅ " + hero.name);
+            System.out.println(this.getName() + " атакует " + hero.getName());
         }
     }
 
     @Override
-    void info() {
-        System.out.println(name + " " + (health < 0 ? "Герой мертв" : health +" "+damage));
+    public void info() {
+        System.out.println(this.getName() + " " + (this.getHealth() < 0 ? this.getName() + " мертв!" : this.getHealth() +" "+damage));
+    }
+
+    @Override
+    public void healing(Hero hero) {
+        System.out.println("Ассасин не может лечить");
     }
 }
