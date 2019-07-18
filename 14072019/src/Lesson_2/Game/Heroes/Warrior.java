@@ -1,8 +1,10 @@
 package Lesson_2.Game.Heroes;
 
 public class Warrior extends Hero implements DealsDamage {
-    public Warrior(int health, String type, int damage, int addHeal) {
-        super(health, type, damage, addHeal);
+    private int damage;
+    public Warrior(int health, String name, int damage) {
+        super(health, name);
+        this.damage = damage;
     }
 
     @Override

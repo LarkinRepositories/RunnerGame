@@ -3,11 +3,13 @@ package Lesson_2.Game.Heroes;
 import java.util.Random;
 
 public class Assasin extends Hero implements DealsDamage {
-    int cricitalHit;
+    private int cricitalHit;
+    private int damage;
     Random random = new Random();
 
-    public Assasin(int heal, String name, int damage, int addHeal) {
-        super(heal, name, damage, addHeal);
+    public Assasin(int health, String name, int damage) {
+        super(health, name);
+        this.damage = damage;
         this.cricitalHit = random.nextInt(20);
     }
 
