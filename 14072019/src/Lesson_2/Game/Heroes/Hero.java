@@ -1,10 +1,8 @@
 package Lesson_2.Game.Heroes;
 
-public abstract class Hero implements Damagable, Healable {
-    protected int health;
-    protected String name;
-
-
+public abstract class Hero implements Damagable, Healable, CanHeal, DealsDamage {
+    private int health;
+    private String name;
 
     public Hero(int health, String name) {
         this.health = health;
@@ -23,10 +21,14 @@ public abstract class Hero implements Damagable, Healable {
     public int getHealth() {
         return health;
     }
+
     @Override
     public void addHealth(int health) {
         this.health += health;
     }
+    public String getName() {
+        return name;
+    }
 
-    abstract void info();
+   public abstract void info();
 }
