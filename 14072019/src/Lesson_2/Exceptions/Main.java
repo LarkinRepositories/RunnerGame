@@ -3,7 +3,7 @@ package Lesson_2.Exceptions;
 public class Main {
     public static void main(String[] args) {
         String[][] strings = new String[][]{
-                {"10","9","8","7"},{"6","5","4","3"}, {"2","1","0","-1"}, {"-2","-3","-4","-5"}
+                {"10","9","8","7"},{"6","5","4","3"}, {"2","1","0","-1"}, {"-2","-3","-10","-5"}
         };
        try {
            System.out.println(sumIt(strings));
@@ -16,7 +16,7 @@ public class Main {
        }
     }
 
-   static int sumIt(String[][] array) throws MyArraySizeException, MyArrayDataException {
+   private static int sumIt(String[][] array) throws MyArraySizeException, MyArrayDataException {
         int sum = 0;
         if (array.length !=4) throw new MyArraySizeException();
         for (int i = 0; i < array.length; i++) {
