@@ -14,8 +14,8 @@ public class Warrior extends Hero {
                 System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage);
+                System.out.println(this.getName() + " наносит урон " + hero.getName());
             }
-            System.out.println(this.getName() + " наносит урон " + hero.getName());
         }
     }
 
