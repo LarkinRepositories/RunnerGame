@@ -20,8 +20,8 @@ public class Assasin extends Hero {
                 System.out.println(this.getName()+" мертв!");
             } else {
                 hero.causeDamage(damage + cricitalHit);
+                System.out.println(this.getName() + " атакует " + hero.getName());
             }
-            System.out.println(this.getName() + " атакует " + hero.getName());
         }
     }
 
