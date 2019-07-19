@@ -10,10 +10,10 @@ public abstract class Hero implements Damagable, Healable, CanHeal, DealsDamage 
     }
     @Override
     public void causeDamage(int damage) {
-        if(this.health < 0) {
+        if(this.health <= 0) {
             System.out.println(this.getName()+" мертв!");
         } else {
-            health -= damage;
+            this.health -= damage;
         }
 
     }
