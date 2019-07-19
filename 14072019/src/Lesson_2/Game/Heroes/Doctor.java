@@ -10,7 +10,7 @@ public class Doctor extends Hero {
     @Override
     public void healing(Hero hero) {
         if (hero.getHealth() <= 0) {
-            System.out.println("Не могу лечить " + hero.getName()+"! "+hero.getName()+" мертв!");
+            System.out.println(this.getName()+": не могу лечить " + hero.getName()+"! "+hero.getName()+" мертв!");
         }
         else {
             hero.addHealth(addHeal);
