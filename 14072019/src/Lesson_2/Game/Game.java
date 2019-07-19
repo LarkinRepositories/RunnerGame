@@ -45,10 +45,6 @@ public class Game {
                             teamTwo.remove(teamTwo.get(y));
                             teamTwo.trimToSize();
                             System.out.println("Теперь игроков в команде2: "+teamTwo.size());
-                            if (teamOne.size() == 0) {
-                                System.out.println("Победила команда 2");
-                                break;
-                            }
                         }
                     }
                     if (teamTwo.get(y) instanceof Doctor) {
@@ -60,10 +56,6 @@ public class Game {
                             teamOne.remove(teamOne.get(x));
                             teamOne.trimToSize();
                             System.out.println("Теперь игроков в команде1: "+teamOne.size());
-                            if (teamTwo.size() == 0) {
-                                System.out.println("Победила команда 2");
-                                break;
-                            }
                         }
                     }
        }
