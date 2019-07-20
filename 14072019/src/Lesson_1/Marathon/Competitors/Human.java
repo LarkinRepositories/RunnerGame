@@ -1,13 +1,13 @@
-package Lesson_1.Marathon;
+package Lesson_1.Marathon.Competitors;
 
 public class Human implements Competitor {
-    String name;
+    private String name;
 
-    int maxRunDistance;
-    int maxJumpHeight;
-    int maxSwimDistance;
+    private int maxRunDistance;
+    private int maxJumpHeight;
+    private int maxSwimDistance;
 
-    boolean active;
+    private boolean active;
 
     @Override
     public boolean isOnDistance() {

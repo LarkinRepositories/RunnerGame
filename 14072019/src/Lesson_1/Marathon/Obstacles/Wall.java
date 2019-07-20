@@ -1,7 +1,9 @@
-package Lesson_1.Marathon;
+package Lesson_1.Marathon.Obstacles;
+
+import Lesson_1.Marathon.Competitors.Competitor;
 
 public class Wall extends Obstacle {
-    int height;
+    private int height;
 
     public Wall(int height) {
         this.height = height;
