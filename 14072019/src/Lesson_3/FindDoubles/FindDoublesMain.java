@@ -19,7 +19,7 @@ public class FindDoublesMain {
         list.add("Болгария");
         findDoubles(list);
     }
-    static void findDoubles(ArrayList<String> list) {
+    private static void findDoubles(ArrayList<String> list) {
         HashMap<String, Integer> doubles = new HashMap<>();
         for (String doubleValue : list) {
                 doubles.put(doubleValue, Collections.frequency(list, doubleValue));
