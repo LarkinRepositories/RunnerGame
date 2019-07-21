@@ -15,6 +15,8 @@ public class FindDoublesMain {
         list.add("Германия");
         list.add("Нидерланды");
         list.add("Россия");
+        list.add("Нидерланды");
+        list.add("Болгария");
         findDoubles(list);
     }
     static void findDoubles(ArrayList<String> list) {
