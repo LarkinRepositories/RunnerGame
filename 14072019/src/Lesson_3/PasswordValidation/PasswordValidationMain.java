@@ -9,7 +9,7 @@ public class PasswordValidationMain {
         String password1 = "ghayqoeld^1";
         String passwordThatMatches = "UapKifL1";
 
-        System.out.println("Вызываем собственный метод validatePassword:");
+        System.out.println("Вызываем собственный метод validatePassword():");
 
         System.out.println(validatePassword(password));
         System.out.println(validatePassword(password1));
