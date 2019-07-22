@@ -8,7 +8,6 @@ public class PhoneBook {
     private HashMap<String, ArrayList<String>> phoneBook;
     public PhoneBook() {
         this.phoneBook = new HashMap<>();
-        this.phoneBook.put("Фамилия3", new ArrayList<String>());
     }
 
     public void add(String surname, String phoneNumber) {
