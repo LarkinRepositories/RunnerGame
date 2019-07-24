@@ -1,22 +1,22 @@
 package Lesson_3.PhoneBook;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 public class PhoneBook {
-    private HashMap<String, ArrayList<String>> phoneBook;
+    private HashMap<String, HashSet<String>> phoneBook;
     public PhoneBook() {
         this.phoneBook = new HashMap<>();
     }
 
     public void add(String surname, String phoneNumber) {
-        ArrayList<String> phoneNumberList = this.phoneBook.get(surname);
-        if (phoneNumberList == null) {
-            phoneNumberList = new ArrayList<>();
-            phoneBook.put(surname, phoneNumberList);
+        HashSet<String> phoneNumberSet = this.phoneBook.get(surname);
+        if (phoneNumberSet == null) {
+            phoneNumberSet = new HashSet<>();
+            phoneBook.put(surname, phoneNumberSet);
         }
-        phoneNumberList.add(phoneNumber);
+        phoneNumberSet.add(phoneNumber);
     }
 
     public void get(String surname) {
