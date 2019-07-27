@@ -46,6 +46,7 @@ public class Controller implements Initializable {
     @FXML
     void sendMsg(ActionEvent e) {
         messageArea.setText(inputMessageArea.getText()+"\n");
+        inputMessageArea.clear();
         inputMessageArea.requestFocus();
     }
 }

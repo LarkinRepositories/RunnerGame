@@ -11,7 +11,7 @@
     <children>
     <AnchorPane id="chatPane" fx:id="chatPane" stylesheets="@../css/Style.css">
       <children>
-      <TextArea fx:id="messageArea" layoutY="42.0" prefHeight="513.0" prefWidth="408.0" />
+      <TextArea fx:id="messageArea" layoutY="42.0" prefHeight="513.0" prefWidth="408.0" editable="false" />
       <TextArea id="inputMessageArea" fx:id="inputMessageArea" layoutX="10.0" layoutY="561.0" prefHeight="37.0" prefWidth="341.0" />
       <Button id="sendMsgButton" fx:id="sendMsgButton" layoutX="358.0" layoutY="561.0" mnemonicParsing="false" onAction="#sendMsg" prefHeight="37.0" prefWidth="48.0" />
       <TextFlow id="emojiList" fx:id="emojiList" layoutX="101.0" layoutY="426.0" prefHeight="81.0" prefWidth="237.0" visible="false">
