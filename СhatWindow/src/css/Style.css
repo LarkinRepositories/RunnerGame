@@ -12,39 +12,6 @@
     -fx-background-insets: 0, 6, 0;
     -fx-background-radius: 8em;
 }
-#inputMessageArea .scroll-pane{
-    -fx-background-color: transparent;
-}
-#inputMessageArea .scroll-pane >.viewport , #inputMessageArea >.viewport{
-    -fx-background-color: transparent;
-}
-
-#inputMessageArea .scroll-pane .scroll-bar:vertical, #inputMessageArea .scroll-bar:vertical{
-    -fx-background-color:inherit;
-}
-
-#inputMessageArea .scroll-pane .scroll-bar:vertical .track{
-    -fx-background-color:transparent;
-    -fx-border-color:transparent;
-    -fx-background-radius: 0em;
-
-}
-#inputMessageArea .scroll-pane .scroll-bar:vertical .increment-button,
-#inputMessageArea .scroll-pane .scroll-bar:vertical .decrement-button{
-    -fx-background-color:transparent;
-    -fx-background-radius: 0em;
-    -fx-padding:0 0 10 0;
-
-}
-
-#inputMessageArea .scroll-pane  .scroll-bar .increment-arrow,
-#inputMessageArea .scroll-pane  .scroll-bar .decrement-arrow {
-    -fx-shape: " ";
-    -fx-padding:0;
-}
-#inputMessageArea .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color:transparent;
-}
 
 #sendMsgButton{
     -fx-background-color: white;
@@ -77,6 +44,12 @@
     -fx-padding: 20px;
     -fx-background-insets: -25px;
 }
-#scrollPane {
+#messageArea {
+    -fx-background-color: linear-gradient(to right, #666699, #8585ad);
+}
+
+#logoutButton {
+    -fx-background-radius: 50%;
     -fx-background-color: transparent;
+    -fx-graphic: url("../img/logout-1.png") ;
 }

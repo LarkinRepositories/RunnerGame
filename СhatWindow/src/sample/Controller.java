@@ -6,24 +6,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
-    private AnchorPane rootPane;
-    @FXML
     private TextArea inputMessageArea;
     @FXML
     private TextFlow emojiList;
     @FXML
-    private Button btnEmoji;
-    @FXML
     private TextArea messageArea;
+    @FXML
+    private Button logoutButton;
+
     @FXML
     void emojiAction(ActionEvent event) {
         if(emojiList.isVisible()){
@@ -39,14 +38,18 @@ public class Controller implements Initializable {
         for (Node text: emojiList.getChildren()) {
             text.setOnMouseClicked(event -> {
             inputMessageArea.setText(inputMessageArea.getText()+" "+((Text)text).getText());
-            emojiList.setVisible(false);
+            //emojiList.setVisible(false);
             });
         }
     }
     @FXML
     void sendMsg(ActionEvent e) {
-        messageArea.setText(inputMessageArea.getText()+"\n");
+        messageArea.appendText(inputMessageArea.getText()+"\n");
         inputMessageArea.clear();
         inputMessageArea.requestFocus();
+    }
+    @FXML
+    void logout(ActionEvent e) {
+        ((Stage)logoutButton.getScene().getWindow()).close();
     }
 }
