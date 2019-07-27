@@ -72,3 +72,11 @@
     17.386906 0 0 1 61.232145,86.845238 17.008928,17.386906 0 0 1 78.241074,69.458332 17.008928,
     17.386906 0 0 1 95.250002,86.845238 Z";
 }
+#chatBox {
+    -fx-background-color: linear-gradient(to right, #666699, #8585ad);
+    -fx-padding: 20px;
+    -fx-background-insets: -25px;
+}
+#scrollPane {
+    -fx-background-color: transparent;
+}
