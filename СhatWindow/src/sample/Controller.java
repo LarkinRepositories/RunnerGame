@@ -22,7 +22,8 @@ public class Controller implements Initializable {
     private TextFlow emojiList;
     @FXML
     private Button btnEmoji;
-
+    @FXML
+    private TextArea messageArea;
     @FXML
     void emojiAction(ActionEvent event) {
         if(emojiList.isVisible()){
@@ -41,5 +42,8 @@ public class Controller implements Initializable {
             emojiList.setVisible(false);
             });
         }
+    }
+    void sendMsg(ActionEvent e) {
+        messageArea.setText(inputMessageArea.getText());
     }
 }
