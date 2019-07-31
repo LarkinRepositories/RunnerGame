@@ -2,13 +2,12 @@ package Lesson_5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
 public class Multithreading {
-    //static final int SIZE = 10000000;
-    static final int SIZE = 10;
+    static final int SIZE = 10000000;
+    //static final int SIZE = 30;
 
     public static void main(String[] args) {
         Multithreading o = new Multithreading();
@@ -18,11 +17,9 @@ public class Multithreading {
 
     private static float[] calculateValues(float[] arr) {
         Arrays.fill(arr, 1);
-        System.out.println(Arrays.toString(arr));
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
-        System.out.println(Arrays.toString(arr));
         return arr;
     }
 
@@ -39,6 +36,7 @@ public class Multithreading {
         final float step = SIZE / (float) threadCount;
         List<float[]> subArrays = new ArrayList<>(threadCount);
         List<Thread> threads = new ArrayList<>(threadCount);
+        long a = System.currentTimeMillis();
         for (int i = 0; i < threadCount; i++) {
             float to = from + step;
             if ( to > SIZE) to = SIZE;
@@ -47,8 +45,6 @@ public class Multithreading {
             int finalI = i;
             threads.add(new Thread(() -> subArrays.set(finalI, calculateValues(subArrays.get(finalI)))));
         }
-
-        long a = System.currentTimeMillis();
         for (Thread t : threads) {
             t.start();
             try {
@@ -56,6 +52,11 @@ public class Multithreading {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+        int offset = 0;
+        for (float[] ar : subArrays) {
+            System.arraycopy(ar, 0, arr, offset , ar.length);
+            offset += ar.length;
         }
         System.out.println(System.currentTimeMillis() - a);
     }
