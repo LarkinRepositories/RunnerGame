@@ -17,30 +17,27 @@ public class ClientHandler {
             this.server = server;
             this.in = new DataInputStream(socket.getInputStream());
             this.out = new DataOutputStream(socket.getOutputStream());
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        while (true) {
-                            String message = in.readUTF();
-                            System.out.println("Client: " + message);
-                            if (message.equals("/end")) {
-                                break;
-                            }
-                           server.broadcastMessage(message);
+            new Thread(() -> {
+                try {
+                    while (true) {
+                        String message = in.readUTF();
+                        System.out.println("Client: " + message);
+                        if (message.equals("/end")) {
+                            break;
                         }
+                       server.broadcastMessage(message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        in.close();
+                        out.close();
+                        socket.close();
+                        server.getClients().remove(ClientHandler.this);
+                        System.out.println("Client disconnected!");
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } finally {
-                        try {
-                            in.close();
-                            out.close();
-                            socket.close();
-                            server.getClients().remove(ClientHandler.this);
-                            System.out.println("Client disconnected!");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }).start();
@@ -48,7 +45,7 @@ public class ClientHandler {
             ex.printStackTrace();
         }
     }
-    public void sendMessage(String message) {
+    public synchronized void sendMessage(String message) {
         try {
             out.writeUTF(message);
             out.flush();

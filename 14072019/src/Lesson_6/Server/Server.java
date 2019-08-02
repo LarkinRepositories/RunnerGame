@@ -42,7 +42,7 @@ public class Server {
         return clients;
     }
 
-    public void broadcastMessage(String message) {
+    public synchronized void broadcastMessage(String message) {
         for (ClientHandler client: clients) {
             client.sendMessage(message);
         }
