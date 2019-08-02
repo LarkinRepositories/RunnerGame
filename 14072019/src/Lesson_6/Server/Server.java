@@ -14,13 +14,13 @@ public class Server {
             System.out.println("Server is running!");
             socket = server.accept();
             System.out.println("Client connected!");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             while (true) {
-                String str = in.readLine();
-                System.out.println("Client: " +str);
-                if (str.equals("/end")) break;
-                out.println("Echo: " +str);
+                String message = in.readUTF();
+                System.out.println("Client: " +message);
+                if (message.equals("/end")) break;
+                out.writeUTF(message);
                 out.flush();
             }
         } catch (IOException e) {
