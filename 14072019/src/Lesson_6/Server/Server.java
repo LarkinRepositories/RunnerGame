@@ -3,25 +3,24 @@ package Lesson_6.Server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Vector;
 
 public class Server {
-    public static void main(String[] args) {
+
+    Vector<ClientHandler> clients;
+
+    public Server() {
+        clients = new Vector<>();
         ServerSocket server = null;
         Socket socket = null;
 
         try {
             server = new ServerSocket(8189);
             System.out.println("Server is running!");
-            socket = server.accept();
-            System.out.println("Client connected!");
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             while (true) {
-                String message = in.readUTF();
-                System.out.println("Client: " +message);
-                if (message.equals("/end")) break;
-                out.writeUTF(message);
-                out.flush();
+                socket = server.accept();
+                clients.add(new ClientHandler(this, socket));
+                System.out.println("Client connected!");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,6 +35,11 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public void broadcastMessage(String message) {
+        for (ClientHandler client: clients) {
+            client.sendMessage(message);
         }
     }
 }
