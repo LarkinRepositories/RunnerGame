@@ -19,6 +19,7 @@ public class Server {
             while (true) {
                 String str = in.readLine();
                 System.out.println("Client: " +str);
+                if (str.equals("/end")) break;
                 out.println("Echo: " +str);
                 out.flush();
             }
