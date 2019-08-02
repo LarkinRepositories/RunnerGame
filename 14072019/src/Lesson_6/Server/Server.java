@@ -20,7 +20,7 @@ public class Server {
             while (true) {
                 socket = server.accept();
                 clients.add(new ClientHandler(this, socket));
-                System.out.println(this.clients+" connected!");
+                System.out.println(clients+" connected!");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class Server {
     }
 
     public Vector<ClientHandler> getClients() {
-        return this.clients;
+        return clients;
     }
 
     public void broadcastMessage(String message) {
