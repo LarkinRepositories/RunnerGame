@@ -22,8 +22,8 @@ public class Controller implements Initializable {
     private DataInputStream in;
     private DataOutputStream out;
 
-    final String IP_ADDRESS = "localhost";
-    final int PORT = 8189;
+    private final String IP_ADDRESS = "localhost";
+    private final int PORT = 8189;
 
     @FXML
     private TextArea inputMessageArea;
