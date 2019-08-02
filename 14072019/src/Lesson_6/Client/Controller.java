@@ -10,10 +10,21 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    private Socket socket;
+    private DataInputStream in;
+    private DataOutputStream out;
+
+    final String IP_ADDRESS = "localhost";
+    final int PORT = 8189;
+
     @FXML
     private TextArea inputMessageArea;
     @FXML
@@ -35,6 +46,34 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            socket = new Socket(IP_ADDRESS, PORT);
+            in = new DataInputStream(socket.getInputStream());
+            out = new DataOutputStream(socket.getOutputStream());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while(true) {
+                            String message = in.readUTF();
+                            messageArea.appendText(message +"\n");
+
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         for (Node text: emojiList.getChildren()) {
             text.setOnMouseClicked(event -> {
             inputMessageArea.setText(inputMessageArea.getText()+" "+((Text)text).getText());
@@ -44,9 +83,14 @@ public class Controller implements Initializable {
     }
     @FXML
     void sendMsg(ActionEvent e) {
-        messageArea.appendText(inputMessageArea.getText()+"\n");
-        inputMessageArea.clear();
-        inputMessageArea.requestFocus();
+        //messageArea.appendText(inputMessageArea.getText()+"\n");
+        try {
+            out.writeUTF(inputMessageArea.getText());
+            inputMessageArea.clear();
+            inputMessageArea.requestFocus();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     @FXML
     void logout(ActionEvent e) {
