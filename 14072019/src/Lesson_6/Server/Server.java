@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class Server {
 
-    Vector<ClientHandler> clients;
+    private Vector<ClientHandler> clients;
 
     public Server() {
         clients = new Vector<>();
@@ -20,7 +20,7 @@ public class Server {
             while (true) {
                 socket = server.accept();
                 clients.add(new ClientHandler(this, socket));
-                System.out.println("Client connected!");
+                System.out.println(this.clients+" connected!");
             }
         } catch (IOException e) {
             e.printStackTrace();
