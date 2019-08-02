@@ -37,6 +37,11 @@ public class Server {
             }
         }
     }
+
+    public Vector<ClientHandler> getClients() {
+        return this.clients;
+    }
+
     public void broadcastMessage(String message) {
         for (ClientHandler client: clients) {
             client.sendMessage(message);
