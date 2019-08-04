@@ -20,7 +20,7 @@ public class Server {
             while (true) {
                 socket = server.accept();
                 clients.add(new ClientHandler(this, socket));
-                System.out.println(clients+" connected!");
+                System.out.println(clients +" connected!");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,14 +37,16 @@ public class Server {
             }
         }
     }
-
-    public Vector<ClientHandler> getClients() {
-        return clients;
-    }
-
     public synchronized void broadcastMessage(String message) {
         for (ClientHandler client: clients) {
             client.sendMessage(message);
         }
+    }
+    public void subsribe(ClientHandler client) {
+       clients.add(client);
+    }
+
+    public void unsubscribe(ClientHandler client) {
+        clients.remove(client);
     }
 }
