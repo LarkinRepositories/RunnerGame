@@ -34,11 +34,10 @@ public class ClientHandler {
                         in.close();
                         out.close();
                         socket.close();
-                        server.getClients().remove(ClientHandler.this);
-                        System.out.println("Client disconnected!");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    server.unsubscribe(ClientHandler.this);
                 }
             }).start();
             } catch (IOException ex) {
@@ -53,4 +52,5 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
+
 }
