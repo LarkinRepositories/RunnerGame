@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class ClientHandler {
     private Server server;
@@ -20,14 +21,25 @@ public class ClientHandler {
             new Thread(() -> {
                 try {
                     while (true) {
+                        String str = in.readUTF();
+                        if (str.startsWith("/auth")) {
+                            String[] tokens = str.split(" ");
+                            String newNick = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
+                            if (newNick != null)  break;
+                        }
+                    }
+                    while (true) {
                         String message = in.readUTF();
                         System.out.println("Client: " + message);
                         if (message.equals("/end")) {
+                            out.writeUTF("/serverClosed");
                             break;
                         }
                        server.broadcastMessage(message);
                     }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
                     e.printStackTrace();
                 } finally {
                     try {
