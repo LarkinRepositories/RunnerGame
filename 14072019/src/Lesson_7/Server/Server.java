@@ -24,8 +24,9 @@ public class Server {
             System.out.println("Server is running!");
             while (true) {
                 socket = server.accept();
-                clients.add(new ClientHandler(this, socket));
-                System.out.println(clients +" connected!");
+                new ClientHandler(this, socket);
+                //clients.add(new ClientHandler(this, socket));
+                //System.out.println(clients +" connected!");
             }
         } catch (IOException e) {
             e.printStackTrace();

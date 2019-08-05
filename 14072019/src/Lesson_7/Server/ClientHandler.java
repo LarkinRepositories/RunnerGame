@@ -11,6 +11,7 @@ public class ClientHandler {
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in;
+    private String nickname;
 
     public ClientHandler(Server server, Socket socket) {
         try {
@@ -24,10 +25,17 @@ public class ClientHandler {
                         String str = in.readUTF();
                         if (str.startsWith("/auth")) {
                             String[] tokens = str.split(" ");
-                            String newNick = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
-                            if (newNick != null)  break;
+                            nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
+                            if (nickname != null)  {
+                                server.subscribe(ClientHandler.this);
+                                server.broadcastMessage(nickname +"joined the conversation");
+                                break;
+                            } else {
+                                sendMessage("Неверный логин/пароль!");
+                            }
                         }
                     }
+
                     while (true) {
                         String message = in.readUTF();
                         System.out.println("Client: " + message);
