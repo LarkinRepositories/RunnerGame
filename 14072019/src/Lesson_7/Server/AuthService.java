@@ -9,6 +9,7 @@ public class AuthService {
     public static void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/zChat", "postgres", "postgres");
+        statement = connection.createStatement();
     }
 
     public static void disconnect() {
