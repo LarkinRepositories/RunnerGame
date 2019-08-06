@@ -18,8 +18,8 @@ public class Server {
 
         try {
             AuthService.connect();
-            String test = AuthService.getNickNameByLoginAndPass("login1", "password1");
-            System.out.println(test);
+            //String test = AuthService.getNickNameByLoginAndPass("login1", "password1");
+            //System.out.println(test);
             server = new ServerSocket(8189);
             System.out.println("Server is running!");
             while (true) {

@@ -27,8 +27,10 @@ public class ClientHandler {
                             String[] tokens = str.split(" ");
                             nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
                             if (nickname != null)  {
+                                sendMessage("/authok");
                                 server.subscribe(ClientHandler.this);
-                                server.broadcastMessage(nickname +"joined the conversation");
+                                System.out.println(nickname+" connected");
+                                server.broadcastMessage(nickname +" joined the conversation");
                                 break;
                             } else {
                                 sendMessage("Неверный логин/пароль!");
@@ -43,7 +45,7 @@ public class ClientHandler {
                             out.writeUTF("/serverClosed");
                             break;
                         }
-                       server.broadcastMessage(message);
+                       server.broadcastMessage(nickname+": "+message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -58,7 +60,7 @@ public class ClientHandler {
                         e.printStackTrace();
                     }
                     server.unsubscribe(ClientHandler.this);
-                    System.out.println("Client disconnected");
+                    System.out.println(nickname+" disconnected");
                 }
             }).start();
             } catch (IOException ex) {

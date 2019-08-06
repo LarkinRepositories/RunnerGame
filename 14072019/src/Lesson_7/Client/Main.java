@@ -4,25 +4,28 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/ChatWindow.fxml"));
-        primaryStage.setTitle("zChat pre alpha");
-        primaryStage.setScene(new Scene(root, 400, 600));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
-
 //        primaryStage.initStyle(StageStyle.TRANSPARENT);
-//        Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/ChatWindow.fxml"));
-//        Scene scene = new Scene(root);
-//        scene.setFill(Color.TRANSPARENT);
-//        primaryStage.setScene(scene);
+//        Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/Login.fxml"));
+//        primaryStage.setTitle("zChat pre alpha");
+//        primaryStage.setScene(new Scene(root, 600, 400));
+//        primaryStage.setResizable(false);
 //        primaryStage.show();
+
+
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/Login.fxml"));
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 
