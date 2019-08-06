@@ -43,6 +43,8 @@ public class ChatWindow implements Initializable {
     private TextField loginField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button signInBtn;
     private boolean isAuthorized;
 
     public void setAuthorized(boolean isAuthorized) {
@@ -52,9 +54,13 @@ public class ChatWindow implements Initializable {
             loginPanel.setManaged(true);
             chatPane.setVisible(false);
             chatPane.setManaged(false);
+            emojiList.setVisible(false);
         } else {
             loginPanel.setVisible(false);
             loginPanel.setManaged(false);
+            loginField.setVisible(false);
+            passwordField.setVisible(false);
+            signInBtn.setVisible(false);
             chatPane.setVisible(true);
             chatPane.setManaged(true);
         }
@@ -79,6 +85,7 @@ public class ChatWindow implements Initializable {
             });
         }
     }
+
     public void connect() {
         try {
             socket = new Socket(IP_ADDRESS, PORT);
@@ -91,7 +98,7 @@ public class ChatWindow implements Initializable {
                         while(true) {
                             String str = in.readUTF();
                             if (str.startsWith("/authok")) {
-                                //setAuthorized = true;
+                                setAuthorized(true);
                                 break;
                             } else {
 
@@ -100,8 +107,7 @@ public class ChatWindow implements Initializable {
                         while (true) {
                             String str = in.readUTF();
                             if (str.equals("/serverClosed")) {
-                               // setAuthorized = false;
-
+                               setAuthorized(false);
                             }
                         }
                     } catch (IOException e) {

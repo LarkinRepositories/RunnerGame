@@ -40,7 +40,7 @@ public class ClientHandler {
 
                     while (true) {
                         String message = in.readUTF();
-                        System.out.println("Client: " + message);
+                        System.out.println(nickname+": " + message);
                         if (message.equals("/end")) {
                             out.writeUTF("/serverClosed");
                             break;
@@ -59,8 +59,10 @@ public class ClientHandler {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    server.unsubscribe(ClientHandler.this);
-                    System.out.println(nickname+" disconnected");
+                    if (nickname != null) {
+                        server.unsubscribe(ClientHandler.this);
+                        System.out.println(nickname + " disconnected");
+                    }
                 }
             }).start();
             } catch (IOException ex) {
