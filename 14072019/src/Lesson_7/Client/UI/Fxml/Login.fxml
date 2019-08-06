@@ -16,7 +16,7 @@
                   <TextField fx:id="loginField" layoutX="186.0" layoutY="111.0" prefHeight="26.0" prefWidth="227.0" promptText="login" />
                   <TextField fx:id="passwordField" layoutX="186.0" layoutY="162.0" prefHeight="26.0" prefWidth="227.0" promptText="password" />
                   <Button layoutX="306.0" layoutY="215.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Sign up" />
-                  <Text fx:id="createText" fill="#240075" layoutX="187.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new account" />
+                  <Text fx:id="createText" fill="#240075" layoutX="187.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new account" />
                </children>
             </AnchorPane>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="198.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
