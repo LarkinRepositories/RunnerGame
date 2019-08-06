@@ -1,4 +1,4 @@
-package Lesson_7.Client;
+package Lesson_7.Client.UI.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class ChatWindow implements Initializable {
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;

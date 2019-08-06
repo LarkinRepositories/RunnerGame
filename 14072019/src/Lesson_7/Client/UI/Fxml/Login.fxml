@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Lesson_7.Client.UI.Controller.Login">
+   <children>
+      <AnchorPane id="loginPane" fx:id="loginPane" layoutX="-4.0" layoutY="-1.0" prefHeight="409.0" prefWidth="606.0" stylesheets="@../css/Login.css">
+         <children>
+            <AnchorPane id="textFieldsPane" fx:id="textFieldsPane" layoutX="2.0" layoutY="75.0" prefHeight="261.0" prefWidth="606.0">
+               <children>
+                  <TextField fx:id="loginField" layoutX="186.0" layoutY="111.0" prefHeight="26.0" prefWidth="227.0" promptText="login" />
+                  <TextField fx:id="passwordField" layoutX="186.0" layoutY="162.0" prefHeight="26.0" prefWidth="227.0" promptText="password" />
+                  <Button layoutX="306.0" layoutY="215.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Sign up" />
+                  <Text fx:id="createText" fill="#240075" layoutX="187.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new account" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="198.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fill="WHITE" layoutX="258.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="zChat pre alpha" wrappingWidth="104.5078125" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
