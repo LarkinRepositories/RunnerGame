@@ -1,11 +1,14 @@
-package Lesson_7.Client.UI.Controller;
+package Lesson_7.ClientGeekBrainsLogic.UI.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -25,6 +28,8 @@ public class ChatWindow implements Initializable {
     private final String IP_ADDRESS = "localhost";
     private final int PORT = 8189;
     @FXML
+    AnchorPane chatPane;
+    @FXML
     private TextArea inputMessageArea;
     @FXML
     private TextFlow emojiList;
@@ -32,6 +37,28 @@ public class ChatWindow implements Initializable {
     private TextArea messageArea;
     @FXML
     private Button logoutButton;
+    @FXML
+    private AnchorPane loginPanel;
+    @FXML
+    private TextField loginField;
+    @FXML
+    private PasswordField passwordField;
+    private boolean isAuthorized;
+
+    public void setAuthorized(boolean isAuthorized) {
+        this.isAuthorized = isAuthorized;
+        if (!isAuthorized) {
+            loginPanel.setVisible(true);
+            loginPanel.setManaged(true);
+            chatPane.setVisible(false);
+            chatPane.setManaged(false);
+        } else {
+            loginPanel.setVisible(false);
+            loginPanel.setManaged(false);
+            chatPane.setVisible(true);
+            chatPane.setManaged(true);
+        }
+    }
 
     @FXML
     void emojiAction(ActionEvent event) {
@@ -45,6 +72,14 @@ public class ChatWindow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        for (Node text: emojiList.getChildren()) {
+            text.setOnMouseClicked(event -> {
+            inputMessageArea.setText(inputMessageArea.getText()+" "+((Text)text).getText());
+            emojiList.setVisible(false);
+            });
+        }
+    }
+    public void connect() {
         try {
             socket = new Socket(IP_ADDRESS, PORT);
             in = new DataInputStream(socket.getInputStream());
@@ -54,33 +89,47 @@ public class ChatWindow implements Initializable {
                 public void run() {
                     try {
                         while(true) {
-                            String message = in.readUTF();
-                            messageArea.appendText(message +"\n");
+                            String str = in.readUTF();
+                            if (str.startsWith("/authok")) {
+                                //setAuthorized = true;
+                                break;
+                            } else {
 
+                            }
+                        }
+                        while (true) {
+                            String str = in.readUTF();
+                            if (str.equals("/serverClosed")) {
+                               // setAuthorized = false;
+
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } finally {
-                        try {
-                            socket.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
             }).start();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        for (Node text: emojiList.getChildren()) {
-            text.setOnMouseClicked(event -> {
-            inputMessageArea.setText(inputMessageArea.getText()+" "+((Text)text).getText());
-            emojiList.setVisible(false);
-            });
+    @FXML
+    public void login() {
+        if (socket == null || socket.isClosed()) {
+            connect();
+        }
+        String username = loginField.getText();
+        String password = passwordField.getText();
+        try {
+            out.writeUTF("/auth "+username+" "+password);
+            loginField.clear();
+            passwordField.clear();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
     @FXML
     void sendMsg(ActionEvent e) {
         //messageArea.appendText(inputMessageArea.getText()+"\n");

@@ -1,4 +1,4 @@
-package Lesson_7.Client.UI.Controller;
+package Lesson_7.ClientGeekBrainsLogic.UI.Controller;
 
 
 import javafx.fxml.FXML;

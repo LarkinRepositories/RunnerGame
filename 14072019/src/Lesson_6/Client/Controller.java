@@ -96,4 +96,7 @@ public class Controller implements Initializable {
     void logout(ActionEvent e) {
         ((Stage)logoutButton.getScene().getWindow()).close();
     }
+
+    public void login(ActionEvent actionEvent) {
+    }
 }
