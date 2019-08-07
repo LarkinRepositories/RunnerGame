@@ -28,8 +28,6 @@ public class ChatWindow implements Initializable {
     private final String IP_ADDRESS = "localhost";
     private final int PORT = 8189;
     @FXML
-    AnchorPane chatPane;
-    @FXML
     private TextArea inputMessageArea;
     @FXML
     private TextFlow emojiList;
@@ -52,8 +50,6 @@ public class ChatWindow implements Initializable {
         if (!isAuthorized) {
             loginPanel.setVisible(true);
             loginPanel.setManaged(true);
-            chatPane.setVisible(false);
-            chatPane.setManaged(false);
             emojiList.setVisible(false);
         } else {
             loginPanel.setVisible(false);
@@ -61,8 +57,6 @@ public class ChatWindow implements Initializable {
             loginField.setVisible(false);
             passwordField.setVisible(false);
             signInBtn.setVisible(false);
-            chatPane.setVisible(true);
-            chatPane.setManaged(true);
         }
     }
 
@@ -78,6 +72,7 @@ public class ChatWindow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setAuthorized(false);
         for (Node text: emojiList.getChildren()) {
             text.setOnMouseClicked(event -> {
             inputMessageArea.setText(inputMessageArea.getText()+" "+((Text)text).getText());
@@ -99,13 +94,16 @@ public class ChatWindow implements Initializable {
                             String str = in.readUTF();
                             if (str.startsWith("/authok")) {
                                 setAuthorized(true);
+                                messageArea.clear();
                                 break;
                             } else {
-
+                                setAuthorized(false);
+                                messageArea.appendText("Incorrect login/password!");
                             }
                         }
                         while (true) {
                             String str = in.readUTF();
+                            messageArea.appendText(str +"\n");
                             if (str.equals("/serverClosed")) {
                                setAuthorized(false);
                             }

@@ -49,6 +49,19 @@ public class Server {
             client.sendMessage(message);
         }
     }
+
+    public synchronized  void whisper(ClientHandler donor, String acceptor, String message) {
+        for (ClientHandler client:clients) {
+            if (client.getNickname().equalsIgnoreCase(acceptor)) {
+                client.sendMessage(String.format("%s whispers: %s", donor.getNickname(), message));
+                donor.sendMessage(String.format("You whispered to %s: %s",acceptor, message));
+                return;
+            }
+        }
+        donor.sendMessage(String.format("Пользователя с ником %s нет в чате", acceptor));
+    }
+
+
     public void subscribe(ClientHandler client) {
        clients.add(client);
     }

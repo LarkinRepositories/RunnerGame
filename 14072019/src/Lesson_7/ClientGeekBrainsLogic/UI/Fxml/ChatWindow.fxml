@@ -19,7 +19,7 @@
       <TextArea fx:id="messageArea" editable="false" layoutY="42.0" prefHeight="513.0" prefWidth="408.0" />
       <TextArea id="inputMessageArea" fx:id="inputMessageArea" layoutX="10.0" layoutY="561.0" prefHeight="37.0" prefWidth="341.0" promptText="type your message here" />
       <Button id="sendMsgButton" fx:id="sendMsgButton" layoutX="358.0" layoutY="561.0" mnemonicParsing="false" onAction="#sendMsg" prefHeight="37.0" prefWidth="48.0" />
-      <TextFlow id="emojiList" fx:id="emojiList" layoutX="101.0" layoutY="426.0" prefHeight="81.0" prefWidth="237.0">
+      <TextFlow id="emojiList" visible="false" fx:id="emojiList" layoutX="101.0" layoutY="426.0" prefHeight="81.0" prefWidth="237.0">
           <children>
               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="😀" />
               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="😁" />

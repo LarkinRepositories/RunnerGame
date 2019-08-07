@@ -29,7 +29,7 @@ public class ClientHandler {
                             if (nickname != null)  {
                                 sendMessage("/authok");
                                 server.subscribe(ClientHandler.this);
-                                System.out.println(nickname+" connected");
+                                System.out.println(nickname +" connected");
                                 server.broadcastMessage(nickname +" joined the conversation");
                                 break;
                             } else {
@@ -44,6 +44,13 @@ public class ClientHandler {
                         if (message.equals("/end")) {
                             out.writeUTF("/serverClosed");
                             break;
+                        }
+                        if (message.startsWith("/w ")){
+                            String[] tokens = message.split(" ");
+                            String nickname = tokens[1];
+                            String msg = message.substring(4 + nickname.length());
+                            server.whisper(this, nickname, msg);
+                            continue;
                         }
                        server.broadcastMessage(nickname+": "+message);
                     }
@@ -77,5 +84,7 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-
+    public String getNickname() {
+        return nickname;
+    }
 }

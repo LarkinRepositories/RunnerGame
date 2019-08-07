@@ -18,11 +18,9 @@ public class Main extends Application {
 //        primaryStage.setResizable(false);
 //        primaryStage.show();
 
-
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
         Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/ChatWindow.fxml"));
         Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
+        //scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
