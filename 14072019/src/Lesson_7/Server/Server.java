@@ -50,7 +50,7 @@ public class Server {
         }
     }
 
-    public synchronized  void whisper(ClientHandler donor, String acceptor, String message) {
+    public synchronized void whisper(ClientHandler donor, String acceptor, String message) {
         for (ClientHandler client:clients) {
             if (client.getNickname().equalsIgnoreCase(acceptor)) {
                 client.sendMessage(String.format("%s whispers: %s", donor.getNickname(), message));
