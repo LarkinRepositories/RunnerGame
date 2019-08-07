@@ -1,5 +1,6 @@
 package Lesson_7.ClientGeekBrainsLogic;
 
+import Lesson_7.Client.UI.Controller.ChatWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +21,11 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("UI/Fxml/ChatWindow.fxml"));
         Scene scene = new Scene(root);
-        //scene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
     }
 
 
