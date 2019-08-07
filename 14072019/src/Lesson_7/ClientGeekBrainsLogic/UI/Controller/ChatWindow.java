@@ -50,7 +50,6 @@ public class ChatWindow implements Initializable {
         if (!isAuthorized) {
             loginPanel.setVisible(true);
             loginPanel.setManaged(true);
-            emojiList.setVisible(false);
         } else {
             loginPanel.setVisible(false);
             loginPanel.setManaged(false);
