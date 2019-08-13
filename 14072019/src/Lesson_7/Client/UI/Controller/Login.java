@@ -1,6 +1,7 @@
 package Lesson_7.Client.UI.Controller;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,6 +51,13 @@ public class Login {
                                 String str = in.readUTF();
                                 if (str.startsWith("/authok")) {
                                     setAuthorized = true;
+                                    Platform.runLater(() -> {
+                                        try {
+                                            createMainChatWindow();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
                                     break;
                                 } else {
                                     authFailedText.setVisible(true);

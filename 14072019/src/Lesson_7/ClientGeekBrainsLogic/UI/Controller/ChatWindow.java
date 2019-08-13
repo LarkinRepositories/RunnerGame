@@ -1,14 +1,16 @@
 package Lesson_7.ClientGeekBrainsLogic.UI.Controller;
 
+import Lesson_7.Server.AuthService;
+import Lesson_7.Server.ClientHandler;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -18,6 +20,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ChatWindow implements Initializable {
@@ -43,7 +46,10 @@ public class ChatWindow implements Initializable {
     private PasswordField passwordField;
     @FXML
     private Button signInBtn;
+    @FXML
+    private VBox chatBox;
     private boolean isAuthorized;
+    private String nickname;
 
     public void setAuthorized(boolean isAuthorized) {
         this.isAuthorized = isAuthorized;
@@ -102,7 +108,12 @@ public class ChatWindow implements Initializable {
                         }
                         while (true) {
                             String str = in.readUTF();
-                            messageArea.appendText(str +"\n");
+                            //messageArea.appendText(str +"\n");
+                            Label label = new Label(str + "\n");
+                            VBox vBox = new VBox();
+
+                            vBox.getChildren().add(label);
+                            Platform.runLater(() -> chatBox.getChildren().add(vBox));
                             if (str.equals("/serverClosed")) {
                                setAuthorized(false);
                             }
@@ -144,6 +155,7 @@ public class ChatWindow implements Initializable {
             ex.printStackTrace();
         }
     }
+
     @FXML
     void logout(ActionEvent e) {
         ((Stage)logoutButton.getScene().getWindow()).close();

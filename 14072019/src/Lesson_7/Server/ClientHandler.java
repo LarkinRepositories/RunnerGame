@@ -1,5 +1,7 @@
 package Lesson_7.Server;
 
+import Lesson_7.ClientGeekBrainsLogic.UI.Controller.ChatWindow;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,6 +14,7 @@ public class ClientHandler {
     private DataOutputStream out;
     private DataInputStream in;
     private String nickname;
+    private int userID;
 
     public ClientHandler(Server server, Socket socket) {
         try {
@@ -26,6 +29,7 @@ public class ClientHandler {
                         if (str.startsWith("/auth")) {
                             String[] tokens = str.split(" ");
                             nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
+                            userID = AuthService.getUserIDByLoginAndPass(tokens[1], tokens[2]);
                             if (nickname != null)  {
                                 sendMessage("/authok");
                                 server.subscribe(ClientHandler.this);
@@ -51,6 +55,12 @@ public class ClientHandler {
                             String msg = message.substring(4 + nickname.length());
                             server.whisper(this, nickname, msg);
                             continue;
+                        }
+                        if (message.startsWith("/ignore")) {
+                            String[] tokens = message.split(" ");
+                            String nickname = tokens[1];
+                            AuthService.blacklist(userID, nickname);
+                            sendMessage(nickname + " blacklisted");
                         }
                        server.broadcastMessage(nickname+": "+message);
                     }
