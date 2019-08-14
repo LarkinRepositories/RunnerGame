@@ -60,7 +60,9 @@
     /*-fx-font-style: oblique;*/
     -fx-font-weight: bold;
 }
-
+#chatScrollPane {
+    -fx-background-color: #666699;
+}
 #logoutButton {
     -fx-background-radius: 50%;
     -fx-background-color: transparent;

@@ -38,7 +38,6 @@ public class ClientHandler {
                                     sendMessage("/authok " +nickname);
                                     server.subscribe(ClientHandler.this);
                                     System.out.println(nickname + " connected");
-                                    System.out.println(AuthService.getBlacklistedUsers(this.userID));
                                     server.broadcastMessage(nickname + " joined the conversation");
                                     break;
                                 }  else {
@@ -68,7 +67,7 @@ public class ClientHandler {
                             String[] tokens = message.split(" ");
                             String nickname = tokens[1];
                             AuthService.blacklist(this.userID, nickname);
-                            sendMessage(nickname + " blacklisted");
+                            //sendMessage(nickname + " blacklisted");
                             continue;
                         }
                        server.broadcastMessage(nickname+": "+message);
