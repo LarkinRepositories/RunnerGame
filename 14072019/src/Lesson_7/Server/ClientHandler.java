@@ -30,13 +30,15 @@ public class ClientHandler {
                         String str = in.readUTF();
                         if (str.startsWith("/auth")) {
                             String[] tokens = str.split(" ");
-                            nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
                             userID = AuthService.getUserIDByLoginAndPass(tokens[1], tokens[2]);
+                            AuthService.passToHashCode(userID, tokens[2]);
+                            nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
                             if (nickname != null)  {
                                 if (!server.isNicknameBusy(nickname)) {
                                     sendMessage("/authok " +nickname);
                                     server.subscribe(ClientHandler.this);
                                     System.out.println(nickname + " connected");
+                                    System.out.println(AuthService.getBlacklistedUsers(this.userID));
                                     server.broadcastMessage(nickname + " joined the conversation");
                                     break;
                                 }  else {
@@ -62,11 +64,12 @@ public class ClientHandler {
                             server.whisper(this, nickname, msg);
                             continue;
                         }
-                        if (message.startsWith("/ignore")) {
+                        if (message.startsWith("/ignore ")) {
                             String[] tokens = message.split(" ");
                             String nickname = tokens[1];
-                            AuthService.blacklist(userID, nickname);
+                            AuthService.blacklist(this.userID, nickname);
                             sendMessage(nickname + " blacklisted");
+                            continue;
                         }
                        server.broadcastMessage(nickname+": "+message);
                     }

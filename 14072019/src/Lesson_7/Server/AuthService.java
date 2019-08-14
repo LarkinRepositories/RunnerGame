@@ -29,14 +29,24 @@ public class AuthService {
     }
 
     public static String getNickNameByLoginAndPass(String login, String password) throws SQLException {
-        String query = String.format("SELECT nickname FROM users WHERE login='%s' and password = '%s'", login, password);
+        String query = String.format("SELECT nickname FROM users WHERE login='%s' and password = '%s'", login, password.hashCode());
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) return rs.getString(1);
         return null;
+    }
+    public static void passToHashCode(int userID, String password) throws SQLException {
+        String query = String.format("UPDATE users SET password='%s' WHERE id=%s", password.hashCode(), userID );
+        statement.executeUpdate(query);
     }
 
     public static void blacklist(int userID, String nickname) throws SQLException {
         String query = String.format("INSERT into blacklist VALUES(%s, '%s')", userID, nickname);
         statement.executeUpdate(query);
+    }
+    public static String getBlacklistedUsers(int userID) throws SQLException {
+        String query = String.format("SELECT blacklisted_users from blacklist WHERE user_id = %s", userID);
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) return rs.getString(1);
+        return null;
     }
 }
