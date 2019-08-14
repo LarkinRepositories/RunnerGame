@@ -70,7 +70,9 @@ public class ClientHandler {
                             //sendMessage(nickname + " blacklisted");
                             continue;
                         }
-                       server.broadcastMessage(nickname+": "+message);
+                       if (!server.isBlacklisted(this, nickname)) {
+                           server.broadcastMessage(nickname + ": " + message);
+                       }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -105,4 +107,9 @@ public class ClientHandler {
     public String getNickname() {
         return nickname;
     }
+
+    public int getUserID() {
+        return userID;
+    }
+
 }
