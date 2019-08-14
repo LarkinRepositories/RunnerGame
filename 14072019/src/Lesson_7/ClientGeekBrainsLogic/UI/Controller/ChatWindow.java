@@ -51,6 +51,10 @@ public class ChatWindow implements Initializable {
     private boolean isAuthorized;
     private String nickname;
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public void setAuthorized(boolean isAuthorized) {
         this.isAuthorized = isAuthorized;
         if (!isAuthorized) {
@@ -98,6 +102,8 @@ public class ChatWindow implements Initializable {
                         while(true) {
                             String str = in.readUTF();
                             if (str.startsWith("/authok")) {
+                                String[] tokens = str.split(" ");
+                                nickname = tokens[1];
                                 setAuthorized(true);
                                 messageArea.clear();
                                 break;
@@ -111,7 +117,10 @@ public class ChatWindow implements Initializable {
                             //messageArea.appendText(str +"\n");
                             Label label = new Label(str + "\n");
                             VBox vBox = new VBox();
-
+                            String[] tokens = str.split(" ");
+                            System.out.println(tokens[0].substring(0, tokens[0].length()-1));
+                            if (tokens[0].substring(0, tokens[0].length()-1).equalsIgnoreCase(nickname)) vBox.setAlignment(Pos.TOP_RIGHT);
+                            else vBox.setAlignment(Pos.TOP_LEFT);
                             vBox.getChildren().add(label);
                             Platform.runLater(() -> chatBox.getChildren().add(vBox));
                             if (str.equals("/serverClosed")) {
