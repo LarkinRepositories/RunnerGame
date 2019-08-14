@@ -115,12 +115,19 @@ public class ChatWindow implements Initializable {
                         while (true) {
                             String str = in.readUTF();
                             //messageArea.appendText(str +"\n");
-                            Label label = new Label(str + "\n");
+                            //Label label = new Label(str + "\n");
+                            Label label;
                             VBox vBox = new VBox();
                             String[] tokens = str.split(" ");
                             System.out.println(tokens[0].substring(0, tokens[0].length()-1));
-                            if (tokens[0].substring(0, tokens[0].length()-1).equalsIgnoreCase(nickname)) vBox.setAlignment(Pos.TOP_RIGHT);
-                            else vBox.setAlignment(Pos.TOP_LEFT);
+                            if (tokens[0].substring(0, tokens[0].length()-1).equalsIgnoreCase(nickname)) {
+                                vBox.setAlignment(Pos.TOP_RIGHT);
+                                label = new Label(tokens[1]+"\n");
+                            }
+                            else {
+                                vBox.setAlignment(Pos.TOP_LEFT);
+                                label = new Label(str + "\n");
+                            }
                             vBox.getChildren().add(label);
                             Platform.runLater(() -> chatBox.getChildren().add(vBox));
                             if (str.equals("/serverClosed")) {
