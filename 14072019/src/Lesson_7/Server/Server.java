@@ -42,6 +42,14 @@ public class Server {
             AuthService.disconnect();
         }
     }
+
+    public boolean isNicknameBusy(String nickname) {
+        for (ClientHandler client : clients) {
+            if (client.getNickname().equalsIgnoreCase(nickname)) return true;
+        }
+        return false;
+    }
+
     public synchronized void broadcastMessage(String message) {
         for (ClientHandler client: clients) {
             client.sendMessage(message);
