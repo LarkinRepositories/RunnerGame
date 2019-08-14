@@ -49,6 +49,9 @@ public class Server {
         }
         return false;
     }
+    public boolean isBlacklisted(ClientHandler client, String nickname) throws SQLException {
+        return AuthService.getBlacklistedUsers(client.getUserID()).contains(nickname);
+    }
 
     public synchronized void broadcastMessage(String message) {
         for (ClientHandler client: clients) {
@@ -56,15 +59,19 @@ public class Server {
         }
     }
 
-    public synchronized void whisper(ClientHandler donor, String acceptor, String message) {
-        for (ClientHandler client:clients) {
-            if (client.getNickname().equalsIgnoreCase(acceptor)) {
-                client.sendMessage(String.format("%s whispers: %s", donor.getNickname(), message));
-                donor.sendMessage(String.format("You whispered to %s: %s",acceptor, message));
-                return;
+    public synchronized void whisper(ClientHandler donor, String acceptor, String message) throws SQLException {
+        if (!isBlacklisted(donor, acceptor)) {
+            for (ClientHandler client : clients) {
+                if (client.getNickname().equalsIgnoreCase(acceptor)) {
+                    client.sendMessage(String.format("%s whispers: %s", donor.getNickname(), message));
+                    donor.sendMessage(String.format("You whispered to %s: %s", acceptor, message));
+                    return;
+                }
             }
+            donor.sendMessage(String.format("Ther're no user with %s nickname in chat", acceptor));
+        } else {
+            donor.sendMessage(String.format("%s is blacklisted!", acceptor));
         }
-        donor.sendMessage(String.format("Пользователя с ником %s нет в чате", acceptor));
     }
 
 
