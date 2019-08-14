@@ -31,11 +31,15 @@ public class ClientHandler {
                             nickname = AuthService.getNickNameByLoginAndPass(tokens[1], tokens[2]);
                             userID = AuthService.getUserIDByLoginAndPass(tokens[1], tokens[2]);
                             if (nickname != null)  {
-                                sendMessage("/authok");
-                                server.subscribe(ClientHandler.this);
-                                System.out.println(nickname +" connected");
-                                server.broadcastMessage(nickname +" joined the conversation");
-                                break;
+                                if (!server.isNicknameBusy(nickname)) {
+                                    sendMessage("/authok");
+                                    server.subscribe(ClientHandler.this);
+                                    System.out.println(nickname + " connected");
+                                    server.broadcastMessage(nickname + " joined the conversation");
+                                    break;
+                                }  else {
+                                    sendMessage(String.format("%s уже авторизован", nickname));
+                                }
                             } else {
                                 sendMessage("Неверный логин/пароль!");
                             }
