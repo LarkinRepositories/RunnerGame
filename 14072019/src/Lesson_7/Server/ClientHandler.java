@@ -1,6 +1,8 @@
 package Lesson_7.Server;
 
 import Lesson_7.ClientGeekBrainsLogic.UI.Controller.ChatWindow;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -32,7 +34,7 @@ public class ClientHandler {
                             userID = AuthService.getUserIDByLoginAndPass(tokens[1], tokens[2]);
                             if (nickname != null)  {
                                 if (!server.isNicknameBusy(nickname)) {
-                                    sendMessage("/authok");
+                                    sendMessage("/authok " +nickname);
                                     server.subscribe(ClientHandler.this);
                                     System.out.println(nickname + " connected");
                                     server.broadcastMessage(nickname + " joined the conversation");
