@@ -1,6 +1,8 @@
 package Lesson_7.Server;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthService {
     private static Connection connection;
@@ -22,7 +24,7 @@ public class AuthService {
     }
 
     public static int getUserIDByLoginAndPass(String login, String password) throws SQLException {
-        String query = String.format("SELECT id FROM users WHERE login='%s' and password = '%s'", login, password);
+        String query = String.format("SELECT id FROM users WHERE login='%s' and password = '%s'", login, password.hashCode());
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) return rs.getInt(1);
         return 0;
@@ -43,10 +45,14 @@ public class AuthService {
         String query = String.format("INSERT into blacklist VALUES(%s, '%s')", userID, nickname);
         statement.executeUpdate(query);
     }
-    public static String getBlacklistedUsers(int userID) throws SQLException {
+
+    public static ArrayList getBlacklistedUsers(int userID) throws SQLException {
         String query = String.format("SELECT blacklisted_users from blacklist WHERE user_id = %s", userID);
         ResultSet rs = statement.executeQuery(query);
-        if (rs.next()) return rs.getString(1);
-        return null;
+        ArrayList<String> blacklisted = new ArrayList<>();
+        while (rs.next()) {
+            blacklisted.add(rs.getString(1));
+        }
+        return blacklisted;
     }
 }
