@@ -36,6 +36,7 @@ public class AuthService {
         if (rs.next()) return rs.getString(1);
         return null;
     }
+
     public static void passToHashCode(int userID, String password) throws SQLException {
         String query = String.format("UPDATE users SET password='%s' WHERE id=%s", password.hashCode(), userID );
         statement.executeUpdate(query);
